@@ -72,9 +72,26 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value="/login",method={RequestMethod.GET,RequestMethod.POST})
-	public /*@ResponseBody*/ User login(@ModelAttribute User user,HttpSession session){
-		User u = userService.userLogin(user.getName(), user.getPassword());
+	public @ResponseBody User login(@ModelAttribute User user,HttpSession session){
+		final User u = userService.userLogin(user.getName(), user.getPassword());
 		System.err.println(u);
+		new Thread(new Runnable() {
+			public void run() {
+				for (int i = 0; i < 2; i++) {
+					try {
+						System.out.println("1");
+						Thread.sleep(2000);
+						System.out.println("2");
+						//u.setUserId(null);
+						//userService.addUser(u);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			
+			}
+		}).start();
 		return u;
 		
 	}
@@ -87,6 +104,7 @@ public class UserController {
 	@RequestMapping(value="/df",method={RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody Date dateformatter(@RequestParam(defaultValue="2011-01-05 11:11:22") Date date,HttpSession session){
 		System.err.println(date);
+		
 		return date;
 		
 	}

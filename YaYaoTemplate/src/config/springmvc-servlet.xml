@@ -19,6 +19,13 @@
 	 <mvc:annotation-driven conversion-service="myConverter" validator="myValidator" content-negotiation-manager="responseContentNegotiationManager" >
 	 <mvc:message-converters>
 	 	<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/plain;charset=utf-8</value>
+				<value>text/html;charset=utf-8</value>
+				<value>application/json;charset=utf-8</value>
+			</list>
+		</property>
 		<property name="objectMapper">
 			<bean class="com.fasterxml.jackson.databind.ObjectMapper">
 				<property name="propertyNamingStrategy">
@@ -35,6 +42,13 @@
 	</bean>
 	
 	<bean class="org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter" >
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/plain;charset=utf-8</value>
+				<value>text/html;charset=utf-8</value>
+				<value>application/xml;charset=utf-8</value>
+			</list>
+		</property>
 		<property name="objectMapper">
 			<bean class="com.fasterxml.jackson.dataformat.xml.XmlMapper">
 				<property name="propertyNamingStrategy">

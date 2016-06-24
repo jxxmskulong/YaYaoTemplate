@@ -54,8 +54,8 @@ public class UserControllerTest {
 	@Test
 	public void xsdfsdfsd() throws Exception {
 		Integer type=0;//0是get
-		//String url="/user/login.html?name=15111336587&password=123456";
-		String url="/user/test2.html?niceName=sdf";
+		String url="/user/login?name=15111336587&password=123456";
+		//String url="/user/test2.html?niceName=sdf";
 		//String url="/";
 		//String url="/user/ysuser.xml?userId=1000&name=15111336587&niceName=聂跃&regTime=2223-11-11 12:11:11";
 		//String url="/user/df.xml?date=2015-11-11 11:11:11";//dateformatter

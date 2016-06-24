@@ -54,7 +54,7 @@
 	<!-- 设置Spring容器加载配置文件路径 -->
 	 <context-param>
 	    <param-name>contextConfigLocation</param-name>
-	    <param-value>classpath:config/spring-dao.xml;classpath:config/spring-service.xml</param-value>
+	    <param-value>classpath:config/spring-dao.xml;classpath:config/spring-service.xml;classpath:config/spring-timer.xml</param-value>
 	</context-param> 
 
 	<!-- 配置SpringMVC的核心控制器，类似于struts2中的过滤器 -->
