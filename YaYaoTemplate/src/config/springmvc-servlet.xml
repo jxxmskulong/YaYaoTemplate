@@ -106,6 +106,8 @@
           >
 		<property name="mediaTypes">
 			<map>
+				<entry key="wx" value="text/x-asm;charset=UTF-8" />
+				<entry key="text" value="text/plain;charset=UTF-8" />
 				<entry key="html" value="text/html;charset=UTF-8" />
 				<entry key="json" value="application/json" />
          		<entry key="xml" value="application/xml" /> 
