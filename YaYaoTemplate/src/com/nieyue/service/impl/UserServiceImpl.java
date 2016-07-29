@@ -5,8 +5,6 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.nieyue.bean.User;
 import com.nieyue.dao.UserDao;
@@ -51,18 +49,17 @@ public class UserServiceImpl implements UserService {
 	 * 增加用户
 	 */
 	@Override
-	@Transactional(propagation=Propagation.REQUIRED,rollbackFor={RuntimeException.class,Exception.class})
-	public void addUser(User user) {
-		userDao.addUser(user);
+	public boolean addUser(User user) {
+		boolean b = userDao.addUser(user);
+		return b;
 	}
 
 	/**
 	 * 更新用户
 	 */
 	@Override
-	@Transactional(propagation=Propagation.REQUIRED,rollbackFor={RuntimeException.class,Exception.class})
-	public void updateUser(User user) {
-		userDao.updateUser(user);
+	public boolean updateUser(User user) {
+		return userDao.updateUser(user);
 	}
 
 	/**
@@ -72,6 +69,9 @@ public class UserServiceImpl implements UserService {
 	public List<User> searchUser(Integer pageNum, Integer pageSize) {
 		if(pageNum<1){
 			pageNum=1;
+		}
+		if(pageSize<1){
+			pageSize=0;//没有数据
 		}
 		List<User> list = userDao.searchUser(pageNum-1, pageSize);
 		return list;
@@ -90,9 +90,8 @@ public class UserServiceImpl implements UserService {
 	 * 删除用户
 	 */
 	@Override
-	@Transactional(propagation=Propagation.REQUIRED,rollbackFor={RuntimeException.class,Exception.class})
-	public void delUser(Integer userId) {
-		userDao.delUser(userId);
+	public boolean delUser(Integer userId) {
+		return userDao.delUser(userId);
 	}
 
 	/**
@@ -101,6 +100,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User loadUser(Integer userId) {
 		User u = userDao.loadUser(userId);
+		return u;
+	}
+	/** 
+	 * 微信隐形账户登录 
+	 */
+	@Override
+	public User weixinBaseUserLogin(String openid) {
+		User u = userDao.weixinBaseUserLogin(openid);
 		return u;
 	}
 

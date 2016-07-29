@@ -40,7 +40,7 @@
         </property>  
         <property name="cronExpression">  
            <!--  每隔一秒钟执行一次   -->
-            <value>5/2 * * * * ?</value>  
+            <value>0/1 * * * * ?</value>  
         </property>  
     </bean>   
 	 <!-- 配置调度器工厂(SchedulerFactoryBean) -->

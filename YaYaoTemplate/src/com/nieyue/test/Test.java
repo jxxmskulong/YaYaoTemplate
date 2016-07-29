@@ -12,7 +12,6 @@ import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.util.JSONBuilder;
-import net.sf.json.xml.XMLSerializer;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.DeserializationConfig;
@@ -56,8 +55,6 @@ public class Test {
 		System.err.println("\u007b \u007d");
 		User u = (User) MyObjectMapper.getObjectMapper(p, new User());
 		System.out.println(u);
-		XMLSerializer serializer = new XMLSerializer();
-		System.out.println(serializer);
 	}
 }
 class O implements Serializable{

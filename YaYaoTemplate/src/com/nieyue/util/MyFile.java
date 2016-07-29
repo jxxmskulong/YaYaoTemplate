@@ -14,7 +14,11 @@ import java.io.OutputStreamWriter;
 
 import javax.imageio.ImageIO;
 
-
+/**
+ * 文件读取类
+ * @author yy
+ *
+ */
 public class MyFile implements Runnable {
 
 	@Override
@@ -70,14 +74,22 @@ public class MyFile implements Runnable {
 	
 	}
 	
-	//创建文件夹  
+	/**
+	 * 创建文件夹  
+	 * @param path
+	 */
     public  void createDir(String path){
         File dir=new File(path);
         if(!dir.exists()){
             dir.mkdirs();
         }
     }
-    //创建新文件
+    /**
+     * 创建新文件
+     * @param path
+     * @param filename
+     * @throws IOException
+     */
     public  void createFile(String path,String filename) throws IOException{
         File file=new File(path+"/"+filename);
         if (!file.getParentFile().exists()){
@@ -87,15 +99,22 @@ public class MyFile implements Runnable {
         	file.createNewFile();
         }
     }
-    //删除文件     
+    /**
+     * 删除文件     
+     * @param path
+     * @param filename
+     */
     public  void delFile(String path,String filename){
         File file=new File(path+"/"+filename);
         if(file.exists()&&file.isFile())
             file.delete();
     }
-   // 2.删除目录要利用File类的delete()方法删除目录时，
-    //必须保证该目录下没有文件或者子目录，否则删除失败，因此在实际应用中,
-    //我们要删除目录，必须利用递归删除该目录下的所有子目录和文件，然后再删除该目录。  
+   /**
+    *  2.删除目录要利用File类的delete()方法删除目录时，
+    *  必须保证该目录下没有文件或者子目录，否则删除失败，因此在实际应用中,
+    *  我们要删除目录，必须利用递归删除该目录下的所有子目录和文件，然后再删除该目录。  
+    * @param path
+    */
          public  void delDir(String path){
              File dir=new File(path);
              if(dir.exists()){
@@ -112,8 +131,12 @@ public class MyFile implements Runnable {
              }
          }
          
-         //利用FileInputStream读取文件
-         
+         /**
+          * 利用FileInputStream读取文件
+          * @param path
+          * @return
+          * @throws IOException
+          */
          public  String readFile(String path) throws IOException{
              File file=new File(path);
              if(!file.exists()||file.isDirectory())
@@ -131,7 +154,12 @@ public class MyFile implements Runnable {
              fis.close();
              return sb.toString();
          }   
-         //写入文件内容
+         /**
+          * 写入文件内容
+          * @param fileName
+          * @param fileContent
+          * @return
+          */
          public  String writeFile(String fileName, String fileContent)   
          {     
              try   
@@ -152,13 +180,27 @@ public class MyFile implements Runnable {
              }
 			return fileContent;  
          }  
-         //读写图片
+         /**
+          * 读写图片
+          * @param fromPath
+          * @param toPath
+          * @param type
+          * @return
+          * @throws IOException
+          */
          public  String imageRW(String fromPath,String toPath,String type) throws IOException{
         	BufferedImage image = ImageIO.read(new File(fromPath));//根据你实际情况改文件路径吧
         	 ImageIO.write(image, type, new File(toPath));
         	return image.toString();
          }
-         //把一个图片截取到另一个图片中
+         /**
+          * 把一个图片截取到另一个图片中
+          * @param fromPath
+          * @param toPath
+          * @param type
+          * @return
+          * @throws IOException
+          */
          public  String imageSub(String fromPath,String toPath,String type) throws IOException{
         	 InputStream in = new FileInputStream(fromPath);
         	 BufferedImage bi = ImageIO.read(in);

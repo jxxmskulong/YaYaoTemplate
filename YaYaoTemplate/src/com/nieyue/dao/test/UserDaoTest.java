@@ -44,7 +44,7 @@ public class UserDaoTest {
 
 	@Test
 	public void testAddUser() {
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 1; i++) {
 			User user=new User();
 			user.setNiceName("聂跃"+i);
 			user.setName("1511133658"+i);
@@ -84,14 +84,22 @@ public class UserDaoTest {
 
 	@Test
 	public void testDelUser() {
-		userDao.delUser(1001);
+		userDao.delUser(1004);
+	}
+	@Test
+	public void testweixinlogin() {
+		User u = userDao.weixinBaseUserLogin("ohzOyv0Kp4NHMfbluAmi53oJWBgk");
+		System.out.println(u);
 	}
 
 	@Test
 	public void testLoadUser() {
-		Integer userId=1000;
+		Integer userId=1001;
+		//if(!userDao.loadUser(userId).equals("")){
 		User user = userDao.loadUser(userId);
-		System.out.println(user.getName());
+		System.out.println(user.getNiceName());
+		//}
+		//System.out.println(user.getName());
 	}
 
 }

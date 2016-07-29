@@ -50,7 +50,7 @@
 			</list>
 		</property>
 		<property name="objectMapper">
-			<bean class="com.fasterxml.jackson.dataformat.xml.XmlMapper">
+		 <bean class="com.fasterxml.jackson.dataformat.xml.XmlMapper">
 				<property name="propertyNamingStrategy">
 					<bean
 						class="com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy" >
@@ -98,7 +98,7 @@
 		</property>
 	</bean>
     <bean id="responseContentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean"
-          p:defaultContentType="application/json"  
+          p:defaultContentType="application/json;charset=UTF-8"  
           p:ignoreAcceptHeader="true"  
           p:favorPathExtension="true"  
           p:favorParameter="false"  
@@ -107,8 +107,7 @@
 		<property name="mediaTypes">
 			<map>
 				<entry key="wx" value="text/x-asm;charset=UTF-8" />
-				<entry key="text" value="text/plain;charset=UTF-8" />
-				<entry key="html" value="text/html;charset=UTF-8" />
+				<entry key="html" value="text/plain;charset=UTF-8" />
 				<entry key="json" value="application/json" />
          		<entry key="xml" value="application/xml" /> 
 				<entry key="xls" value="application/vnd.ms-excel" /> 
@@ -263,20 +262,24 @@
  -->   </bean>  
    
 	<!--定义异常处理页面 -->
-<!-- <bean id="exceptionResolver"
-		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+ <bean id="exceptionResolver"
+		class="com.nieyue.exception.MySimpleMappingExceptionResolver">
+		<property name="order" value="0"></property>
 		<property name="exceptionMappings">
 			<props>
-				<prop key="org.springframework.web.HttpSessionRequiredException">mall/mobile/404</prop>
-				<prop key="java.sql.SQLException">mall/mobile/404</prop>
-				<prop key="java.io.IOException">mall/mobile/404</prop>
-				<prop key="java.lang.Exception">mall/mobile/404</prop>
-				<prop key="java.lang.RuntimeException">mall/mobile/404</prop>
+				<prop key="com.nieyue.exception.MySellerSessionException">/exception/sellerSession</prop>
+				<prop key="org.springframework.web.method.annotation.MethodArgumentTypeMismatchException">/exception/sellerSession</prop>
+				<prop key="org.springframework.dao.DataIntegrityViolationException">/exception/fail</prop>
+				<prop key="org.springframework.web.method.annotation.MethodArgumentTypeMismatchException">/exception/fail</prop>
+				<prop key="org.springframework.web.HttpSessionRequiredException">/exception/fail</prop>
+				<prop key="java.sql.SQLException">/exception/fail</prop>
+				<prop key="java.io.IOException">/exception/fail</prop>
+				<prop key="java.lang.RuntimeException">/exception/fail</prop>
+				<prop key="java.lang.Exception">/exception/fail</prop>
 			</props>
 		</property>
-		<property name="defaultErrorView" value="mall/mobile/404" />
-	</bean>  -->
-
+		 <property name="defaultErrorView" value="/exception/fail" /> 
+	</bean>
 	<!-- <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"> 
 		<property name="messageConverters"> <list> <ref bean="mappingJackson2HttpMessageConverter" 
 		/> </list> </property> </bean> -->
@@ -287,6 +290,13 @@
 			<bean class="com.nieyue.interceptor.HttpParameterInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors> -->
+	<!-- 拦截权限 -->
+	<!-- <mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**/*update*/**"/>
+			<bean class="com.nieyue.interceptor.SellerControllerSessionInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>   -->
 	
 	<!-- 拦截器配置 -->
 	<!-- <mvc:interceptors > 配置Shiro拦截器，实现注册用户的注入 <mvc:interceptor > <mvc:mapping 
@@ -303,4 +313,5 @@
   		<bean id="ehcacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
   		 p:config-location="classpath:config/ehcache.xml" p:shared="true"/>
  -->
+ 	
 </beans>

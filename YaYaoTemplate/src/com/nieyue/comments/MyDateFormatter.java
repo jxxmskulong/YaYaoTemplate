@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.Locale;
 
 import org.springframework.format.Formatter;
-import org.springframework.format.datetime.DateFormatter;
 
 public class MyDateFormatter implements Formatter<Date>{
 

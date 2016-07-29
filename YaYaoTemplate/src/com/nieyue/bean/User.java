@@ -4,12 +4,15 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlCData;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 /**
  * 用户类
  * @author yy
  *
  */
-
+@JacksonXmlRootElement(localName="xml")
 public class User implements Serializable {
 	
 	private static final long serialVersionUID = 8198930199550185349L;
@@ -17,34 +20,42 @@ public class User implements Serializable {
 	 * 用户id
 	 */
 	@NotNull(message="{user.userId.notNull}")
+	@JacksonXmlCData
 	private Integer userId;
 	/**
 	 * 昵称
 	 */
-	@NotNull(message="{user.niceName.notNull}")
+	@JacksonXmlCData
 	private String niceName;
+	/**
+	 * 微信openid
+	 */
+	@JacksonXmlCData
+	private String openid;
 	/**
 	 * 登录名
 	 */
-	@NotNull(message="{user.name.notNull}")
+	@JacksonXmlCData
 	private String name;
 	/**
 	 * 登录密码
 	 */
-	@NotNull(message="{user.password.notNull}")
+	@JacksonXmlCData
 	private String password;
 	/**
 	 * 注册时间 
 	 */
 	@NotNull(message="{user.regTime.notNull}")
+	@JacksonXmlCData
 	private Date regTime;
 	/**
 	 * 最后登陆时间
 	 */
 	@NotNull(message="{user.lastLoginTime.notNull}")
+	@JacksonXmlCData
 	private Date lastLoginTime;
 	public User(Integer userId, String niceName, String name, String password,
-			Date regTime, Date lastLoginTime) {
+			Date regTime, Date lastLoginTime,String openid) {
 		super();
 		this.userId = userId;
 		this.niceName = niceName;
@@ -52,6 +63,7 @@ public class User implements Serializable {
 		this.password = password;
 		this.regTime = regTime;
 		this.lastLoginTime = lastLoginTime;
+		this.openid=openid;
 	}
 	public User() {
 		super();
@@ -92,12 +104,13 @@ public class User implements Serializable {
 	public void setLastLoginTime(Date lastLoginTime) {
 		this.lastLoginTime = lastLoginTime;
 	}
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", niceName=" + niceName + ", name="
-				+ name + ", password=" + password + ", regTime=" + regTime
-				+ ", lastLoginTime=" + lastLoginTime + "]";
+	public String getOpenid() {
+		return openid;
 	}
+	public void setOpenid(String openid) {
+		this.openid = openid;
+	}
+
 	
 	
 }

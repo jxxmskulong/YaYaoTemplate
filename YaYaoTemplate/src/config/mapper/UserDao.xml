@@ -6,9 +6,17 @@
 <!-- 添加用户 -->
 <insert id="addUser" parameterType="User" flushCache="true">  
    INSERT IGNORE INTO
-   		 user_tb (nice_name,name,password,reg_time,last_login_time)
+   		 user_tb (nice_name,name,password,
+   		 <if test="regTime!=null">reg_time,</if>
+   		 <if test="lastLoginTime!=null">last_login_time,</if>
+   		 openid
+   		 )
    VALUES
-    	 (#{niceName},#{name},#{password},#{regTime},#{lastLoginTime})  
+    	 (#{niceName},#{name},#{password},
+   		 <if test="regTime!=null">#{regTime},</if>
+   		 <if test="lastLoginTime!=null">#{lastLoginTime},</if>
+    	 #{openid}
+  			)  
 </insert>  
 <!-- 更新用户 -->
 <update id="updateUser" parameterType="User">  
@@ -17,6 +25,7 @@
     SET 
     	nice_name=#{niceName},
     	name=#{name},
+    	openid=#{openid},
     	password=#{password},
     	reg_time=#{regTime},
     	last_login_time=#{lastLoginTime}
@@ -30,6 +39,7 @@ SELECT
 	 nice_name,
 	 name,
 	 password,
+	 openid,
 	 reg_time,
 	 last_login_time 
 FROM user_tb 
@@ -42,6 +52,7 @@ WHERE user_id=#{userId}
 	 	nice_name,
 	 	name,
 	 	password,
+	 	openid,
 	 	reg_time,
 	 	last_login_time  
 	FROM user_tb
@@ -57,6 +68,7 @@ WHERE user_id=#{userId}
 	 	nice_name,
 	 	name,
 	 	password,
+	 	openid,
 	 	reg_time,
 	 	last_login_time  
 	FROM user_tb
@@ -78,6 +90,7 @@ WHERE user_id=#{userId}
 	 	nice_name,
 	 	name,
 	 	password,
+	 	openid,
 	 	reg_time,
 	 	last_login_time 
 	FROM user_tb
@@ -90,14 +103,28 @@ WHERE user_id=#{userId}
 	 	nice_name,
 	 	name,
 	 	password,
+	 	openid,
 	 	reg_time,
 	 	last_login_time 
 	FROM user_tb
 	WHERE name=#{name} and password=#{password}
 </select>  
+<!-- 微信账户隐形登录-->
+<select id="weixinBaseUserLogin"  resultType="User">  
+    SELECT
+	 	user_id,
+	 	nice_name,
+	 	name,
+	 	password,
+	 	openid,
+	 	reg_time,
+	 	last_login_time 
+	FROM user_tb
+	WHERE openid=#{openid}
+</select>  
 <!-- 删除注册账户-->
-<select id="delUser"  parameterType="Integer">  
+<delete id="delUser"  parameterType="Integer">  
     DELETE FROM
     	 user_tb WHERE user_id=#{userId}
-</select>  
+</delete>  
 </mapper>

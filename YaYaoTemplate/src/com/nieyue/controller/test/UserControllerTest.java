@@ -4,7 +4,6 @@ import static org.junit.Assert.fail;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import javax.annotation.Resource;
 
@@ -50,14 +49,26 @@ public class UserControllerTest {
 	public void testSelectUserByID() {
 		fail("Not yet implemented");
 	}
-
 	@Test
 	public void xsdfsdfsd() throws Exception {
-		Integer type=0;//0是get
-		//String url="/user/login?name=sdf_sdfDDdf&password=123456";
-		String url="/user/test2.wx?niceName=的份上";
-		//String url="/";
-		//String url="/user/ysuser.xml?userId=1000&name=sdf_sdfDDdf&niceName=聂跃&regTime=2223-11-11 12:11:11";
+		Integer type=1;//0是get
+		//String url="/1000.xml";
+		//String url="/weixin/refund/query";//退款
+		//String url="/weixin/refund";//退款
+		//String url="/weixin/order/close";//关闭订单
+		//String url="/weixin/order/query";//订单查询
+		//String url="/weixin/authorize";//授权登录
+		//String url="/weixin/test/11";//统一下单
+		String url="/weixin/qrcode2/11";//统一下单扫码2
+		//String url="/weixin/h5paywap/11";//统一下单h5
+		//String url="/testXmlUser?<xml><user_id>324</user_id><nice_name>sdfsdf</nice_name><name/><password/><reg_time>1468900206858</reg_time><last_login_time/></xml>";
+		//String url="/sdfsd/sdf/sdbf/sdf";
+		//String url="/user/gobackhtml";
+		//String url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx0cfdb598d619807e&redirect_uri=http://www.baidu.com&response_type=code&scope=snsapi_base&state=200#wechat_redirect";
+		//String url="/user/login?name=15111336587&password=123456";
+		//String url="/user/test2?niceName=sdf";
+		//String url="/user/1000";
+		//String url="/user/ysuser.xml?userId=1000&name=15111336587&niceName=聂跃&regTime=2223-11-11 12:11:11";
 		//String url="/user/df.xml?date=2015-11-11 11:11:11";//dateformatter
 		//String url="/user/model?public=\u007B \"user_id\":\"1000\"\u007D &key=2";
 		//String url="/user/model?public=(\"user_id\":\"1000\") &key=(\"format\":\"json\")";

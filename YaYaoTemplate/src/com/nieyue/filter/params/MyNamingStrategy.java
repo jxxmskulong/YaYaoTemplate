@@ -31,6 +31,7 @@ public class MyNamingStrategy {
 	       }  
 	       return sb.toString();  
 	   }  
+	
 	/**
 	 * aaa_bbb转aaaBbb	
 	 * @param param
